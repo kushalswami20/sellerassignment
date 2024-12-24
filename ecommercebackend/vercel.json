@@ -12,6 +12,7 @@
       "dest": "src/app.js",
       "headers":{
       "Access-Control-Allow-Origin":"*"
+      }
     }
   ]
 }
