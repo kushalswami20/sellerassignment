@@ -47,6 +47,7 @@ const AdminSignup = () => {
 
     try {
       const response = await fetch('https://sellerassignment-backend.vercel.app/admin/seller/signup', {
+        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
