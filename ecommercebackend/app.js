@@ -85,7 +85,7 @@ app.use((req, res, next) => {
 });
 
 // MongoDB Connection
-const uri = "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0" ||process.env.MONGO_URI;
+const uri = "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0" ||process.env.MONGODB_URI;
 mongoose.connect(uri)
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
