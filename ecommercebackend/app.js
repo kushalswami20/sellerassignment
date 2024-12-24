@@ -20,70 +20,50 @@ const app = express();
 
 // Middleware
 const corsOptions = {
-  origin: [
-    'https://sellerassignment.vercel.app',
-    'https://merabestie.com',
-    'https://hosteecommerce.vercel.app',
-    'http://localhost:3000'
-  ],
+  origin: ['https://sellerassignment.vercel.app', 'https://merabestie.com', 'https://hosteecommerce.vercel.app', 'http://localhost:3000'],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
-    'Content-Type', 
-    'Authorization', 
+    'Content-Type',
+    'Authorization',
     'X-Requested-With',
     'Accept',
     'Origin'
-  ],
-  exposedHeaders: ['Set-Cookie'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  ]
 };
 
-// Apply CORS middleware before other middlewares
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Cookie settings for cross-origin requests
-app.use(require('cookie-parser')());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Session configuration
-app.use(
-  session({
-    secret: crypto.randomBytes(64).toString('hex'),
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
-      collectionName: 'sessions',
-    }),
-    cookie: {
-      secure: true,
-      sameSite: 'none',
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      path: '/',
-      domain: '.vercel.app'
-    },
-  })
-);
-
-// Add Vercel-specific headers middleware
+// Additional middleware to ensure proper OPTIONS handling
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header(
-    'Access-Control-Allow-Methods',
-    'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
-  );
-  res.header(
-    'Access-Control-Allow-Headers',
-    'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
-  );
+  if (req.method === 'OPTIONS') {
+    // Handle preflight
+    res.header('Access-Control-Allow-Origin', corsOptions.origin);
+    res.header('Access-Control-Allow-Methods', corsOptions.methods.join(','));
+    res.header('Access-Control-Allow-Headers', corsOptions.allowedHeaders.join(','));
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.status(204).end();
+    return;
+  }
   next();
 });
 
+// The rest of your middleware
+app.use(express.json());
+app.use(require('cookie-parser')());
+app.use(express.urlencoded({ extended: true }));
+
+// Example route to test CORS
+app.get('/test', (req, res) => {
+  res.json({ message: 'CORS is working' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
 // MongoDB Connection
 const uri = "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0" ||process.env.MONGODB_URI;
 mongoose.connect(uri)
