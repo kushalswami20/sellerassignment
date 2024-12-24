@@ -19,11 +19,14 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
-
+app.use(cors({
+  origin: ['http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app','https://sellerassignment.vercel.app'], 
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
 
 app.use(express.json());
-// app.options('*', cors(corsOptions));
 app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: true }));
 
