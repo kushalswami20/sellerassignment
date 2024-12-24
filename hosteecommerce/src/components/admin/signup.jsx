@@ -46,7 +46,7 @@ const AdminSignup = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5001/admin/seller/signup', {
+      const response = await fetch('https://sellerassignment.vercel.app/admin/seller/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
