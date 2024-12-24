@@ -49,7 +49,8 @@ const AdminSignup = () => {
       const response = await fetch('https://sellerassignment-backend.vercel.app/admin/seller/signup', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'https://sellerassignment.vercel.app'
         },
         body: JSON.stringify({
           phoneNumber,
