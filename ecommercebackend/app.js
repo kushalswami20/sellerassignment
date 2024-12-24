@@ -19,42 +19,70 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: ['http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app','https://sellerassignment.vercel.app'], 
+const corsOptions = {
+  origin: [
+    'https://sellerassignment.vercel.app',
+    'https://merabestie.com',
+    'https://hosteecommerce.vercel.app',
+    'http://localhost:3000'
+  ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+  ],
+  exposedHeaders: ['Set-Cookie'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
 
-app.use(express.json());
+// Apply CORS middleware before other middlewares
+app.use(cors(corsOptions));
+
+// Cookie settings for cross-origin requests
 app.use(require('cookie-parser')());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Session configuration
 app.use(
   session({
     secret: crypto.randomBytes(64).toString('hex'),
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0",
+      mongoUrl: process.env.MONGODB_URI,
       collectionName: 'sessions',
     }),
     cookie: {
-      secure: true, // true in production
-      sameSite: 'none', 
+      secure: true,
+      sameSite: 'none',
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-      domain: '.vercel.app' // Add this line
+      maxAge: 24 * 60 * 60 * 1000,
+      path: '/',
+      domain: '.vercel.app'
     },
   })
 );
 
-// Routes
-app.use('/auth', authRoutes);
-app.use('/admin', adminAuthRoutes);
-app.use('/cart', cartRoutes);
-app.use('/complaints', complaintsRoutes);
-app.use('/coupon',couponRoutes)
+// Add Vercel-specific headers middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
+  );
+  res.header(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+  );
+  next();
+});
 
 // MongoDB Connection
 const uri = "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0" ||process.env.MONGO_URI;
