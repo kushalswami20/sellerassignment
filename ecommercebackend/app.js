@@ -19,16 +19,24 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-const corsOptions={
-  origin: ['https://sellerassignment.vercel.app','http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app'], 
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With','Access-Control-Allow-Origin','Access-Control-Allow-Credentials','Access-Control-Allow-Methods','Access-Control-Allow-Headers']
-};
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://sellerassignment.vercel.app');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).json({
+      body: "OK"
+    });
+  }
+  
+  next();
+});
 
 app.use(express.json());
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
 app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: true }));
 
@@ -46,6 +54,7 @@ app.use(
       sameSite: 'none', 
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
+      domain: '.vercel.app' // Add this line
     },
   })
 );
