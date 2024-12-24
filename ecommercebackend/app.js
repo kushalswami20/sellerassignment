@@ -19,21 +19,13 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://sellerassignment.vercel.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    return res.status(200).json({
-      body: "OK"
-    });
-  }
-  
-  next();
-});
+app.use(cors({
+  origin: ['http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app','https://sellerassignment.vercel.app/'], 
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
 
 app.use(express.json());
 // app.options('*', cors(corsOptions));
