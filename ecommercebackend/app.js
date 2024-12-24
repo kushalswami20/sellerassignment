@@ -38,11 +38,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
+      mongoUrl: "mongodb+srv://seller:seller@cluster0.qy3c3.mongodb.net/?retryWrites=true&w=majority&appName=cluster0",
       collectionName: 'sessions',
     }),
     cookie: {
-      secure: false,
+      secure: true, // true in production
+      sameSite: 'none', 
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     },
