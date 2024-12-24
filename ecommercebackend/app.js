@@ -23,7 +23,7 @@ const corsOptions={
   origin: ['https://sellerassignment.vercel.app','http://localhost:3000','https://merabestie.com','https://hosteecommerce.vercel.app'], 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With','Access-Control-Allow-Origin','Access-Control-Allow-Credentials','Access-Control-Allow-Methods','Access-Control-Allow-Headers']
 };
 app.use(cors(corsOptions));
 
