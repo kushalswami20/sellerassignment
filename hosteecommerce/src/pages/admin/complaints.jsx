@@ -23,7 +23,7 @@ const Complaints = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:5001/admin/verify-seller', {
+        const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-seller`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const Complaints = () => {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://localhost:5001/complaints/get-complaints');
+      const response = await fetch(`${process.env.BACKEND_URL}/complaints/get-complaints`);
       const data = await response.json();
       setComplaints(data.complaints);
     } catch (error) {
@@ -75,7 +75,7 @@ const Complaints = () => {
 
   const handleStatusChange = async (complaintId, newStatus) => {
     try {
-      const response = await fetch('http://localhost:5001/update-complaint-status', {
+      const response = await fetch(`${process.env.BACKEND_URL}/update-complaint-status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

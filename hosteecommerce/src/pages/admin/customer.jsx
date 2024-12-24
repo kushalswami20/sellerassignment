@@ -22,7 +22,7 @@ const Customers = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:5001/admin/verify-seller', {
+        const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-seller`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ const Customers = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch('http://localhost:5001/get-user');
+      const response = await fetch(`${process.env.BACKEND_URL}/get-user`);
       const data = await response.json();
       if (data.success) {
         // Map the user data and set default values if fields are missing
@@ -77,7 +77,7 @@ const Customers = () => {
 
   const handleStatusChange = async (userId, newStatus) => {
     try {
-      const response = await fetch('http://localhost:5001/update-account-status', {
+      const response = await fetch(`${process.env.BACKEND_URL}/update-account-status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

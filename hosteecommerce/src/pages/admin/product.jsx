@@ -33,7 +33,7 @@ const Product = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:5001/admin/verify-seller",
+          `${process.env.BACKEND_URL}/admin/verify-seller`,
           {
             method: "POST",
             headers: {
@@ -63,7 +63,7 @@ const Product = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:5001/get-product");
+      const response = await fetch(`${process.env.BACKEND_URL}/get-product`);
       const data = await response.json();
       setProducts(data.products); // Access the products array from response
     } catch (error) {
@@ -85,7 +85,7 @@ const Product = () => {
 
   const handleSave = async (productId) => {
     try {
-      const response = await fetch("http://localhost:5001/instock-update", {
+      const response = await fetch(`${process.env.BACKEND_URL}/instock-update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -159,7 +159,7 @@ const Product = () => {
     try {
       console.log("Deleting product:", productToDelete.productId); // Debug log
       const response = await fetch(
-        `http://localhost:5001/delete-product/${productToDelete.productId}`,
+        `${process.env.BACKEND_URL}/delete-product/${productToDelete.productId}`,
         {
           method: "DELETE",
           headers: {

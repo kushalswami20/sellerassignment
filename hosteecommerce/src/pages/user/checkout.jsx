@@ -52,7 +52,7 @@ const Checkout = () => {
     }
 
     try {
-      const cartResponse = await fetch(`http://localhost:5001/cart/${userId}`);
+      const cartResponse = await fetch(`${process.env.BACKEND_URL}/cart/${userId}`);
       const cartData = await cartResponse.json();
 
       if (!cartData.success) {
@@ -73,7 +73,7 @@ const Checkout = () => {
       }, {});
 
       const productPromises = Object.values(groupedItems).map(async (item) => {
-        const productResponse = await fetch(`http://localhost:5001/product/${item.productId}`);
+        const productResponse = await fetch(`${process.env.BACKEND_URL}/product/${item.productId}`);
         const productData = await productResponse.json();
         
         if (productData.success) {
@@ -144,7 +144,7 @@ const Checkout = () => {
 
     if (saveAddress) {
       try {
-        await fetch('http://localhost:5001/update-address', {
+        await fetch(`${process.env.BACKEND_URL}/update-address`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -169,7 +169,7 @@ const Checkout = () => {
     }));
 
     try {
-      const response = await fetch('http://localhost:5001/cart/place-order', {
+      const response = await fetch(`${process.env.BACKEND_URL}/cart/place-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

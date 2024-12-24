@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5001/admin/login",
+        `${process.env.BACKEND_URL}/admin/login`,
         {
           method: "POST",
           headers: {

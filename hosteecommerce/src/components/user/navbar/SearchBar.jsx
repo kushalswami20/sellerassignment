@@ -36,7 +36,7 @@ const SearchBar = () => {
     const fetchProducts = async (input) => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:5001/get-product');
+            const response = await fetch(`${process.env.BACKEND_URL}/get-product`);
             const data = await response.json();
             if (data.success) {
                 const validProducts = data.products.filter(product => 

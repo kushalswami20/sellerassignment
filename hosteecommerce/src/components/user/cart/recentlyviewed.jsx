@@ -16,7 +16,7 @@ const RecentlyViewed = () => {
       }
 
       const productPromises = recentlyViewedProducts.map(async (element) => {
-        const response = await fetch('http://localhost:5001/product/' + element);
+        const response = await fetch(`${process.env.BACKEND_URL}/product/` + element);
         const productDetail = await response.json();
         return productDetail.product;
       });

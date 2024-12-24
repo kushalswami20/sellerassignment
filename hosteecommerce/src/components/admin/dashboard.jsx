@@ -21,7 +21,7 @@ const Dashboard = () => {
     const getOrderData = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch("http://localhost:5001/get-orders");
+            const response = await fetch(`${process.env.BACKEND_URL}/get-orders`);
             if (!response.ok) {
                 throw new Error('Failed to fetch orders');
             }
@@ -67,7 +67,7 @@ const Dashboard = () => {
     
     const fetchProducts = async (req,res)=>{
         try{
-            const response = await fetch("http://localhost:5001/get-product");
+            const response = await fetch(`${process.env.BACKEND_URL}/get-product`);
             const  data = await response.json();
             if(data.success){
 

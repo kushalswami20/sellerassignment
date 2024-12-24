@@ -56,7 +56,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/:productId`, {
+        const response = await fetch(`${process.env.BACKEND_URL}/:productId`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ const ProductDetail = () => {
 
   const fetchRelatedProducts = async (category) => {
     try {
-      const response = await fetch(`http://localhost:5001/product/category/${category}`);
+      const response = await fetch(`${process.env.BACKEND_URL}/product/category/${category}`);
       if (!response.ok) {
         throw new Error('Failed to fetch related products');
       }
@@ -212,7 +212,7 @@ const ProductDetail = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:5001/cart/addtocart', {
+      const response = await fetch(`${process.env.BACKEND_URL}/cart/addtocart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

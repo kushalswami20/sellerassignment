@@ -17,7 +17,7 @@ function GiftBox() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5001/product/category', {
+        const response = await fetch(`${process.env.BACKEND_URL}/product/category`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

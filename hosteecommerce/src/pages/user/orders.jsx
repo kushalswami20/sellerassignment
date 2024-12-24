@@ -19,7 +19,7 @@ const Order = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:5001/find-my-order`, {
+        const response = await fetch(`${process.env.BACKEND_URL}/find-my-order`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ const Order = () => {
 
   const fetchProductDetails = async (productId) => {
     try {
-      const response = await fetch('http://localhost:5001/:productId', {
+      const response = await fetch(`${process.env.BACKEND_URL}/:productId`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -66,7 +66,7 @@ const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:5001/admin/logout', {
+            const response = await fetch(`${process.env.BACKEND_URL}/admin/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,33 +83,7 @@ const Sidebar = () => {
         }
     };
 
-    // const handleSubmit = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:5001/create-product', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(productData)
-    //         });
-            
-    //         if(response.ok) {
-    //             setShowDialog(false);
-    //             setProductData({
-    //                 name: '',
-    //                 price: '',
-    //                 img: '',
-    //                 category: '',
-    //                 rating: 0,
-    //                 productId: '',
-    //                 inStockValue: 0,
-    //                 soldStockValue: 0
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.error('Error creating product:', error);
-    //     }
-    // };
+    
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
         if (files.length + imagePreviews.length > 5) {
@@ -175,7 +149,7 @@ const Sidebar = () => {
                 formData.append('images', file);
             });
 
-            const response = await fetch('http://localhost:5001/add-product', {
+            const response = await fetch(`${process.env.BACKEND_URL}/add-product`, {
                 method: 'POST',
                 body: formData
             });

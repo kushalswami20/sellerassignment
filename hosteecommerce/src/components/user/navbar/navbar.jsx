@@ -42,7 +42,7 @@ const ProfessionalNavbar = () => {
 
       try {
         const cartResponse = await fetch(
-          `http://localhost:5001/cart/get-cart`, {
+          `${process.env.BACKEND_URL}/cart/get-cart`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ const ProfessionalNavbar = () => {
       if (userId) {
         try {
           const response = await fetch(
-            `http://localhost:5001/auth/user/${userId}`
+            `${process.env.BACKEND_URL}/auth/user/${userId}`
           );
           const data = await response.json();
           setUserName(data.name);
