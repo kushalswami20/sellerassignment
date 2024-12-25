@@ -21,7 +21,7 @@ const Dashboard = () => {
     const getOrderData = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch(`${process.env.BACKEND_URL}/get-orders`);
+            const response = await fetch('https://sellerassignment.onrender.com/get-orders');
             if (!response.ok) {
                 throw new Error('Failed to fetch orders');
             }
@@ -67,7 +67,7 @@ const Dashboard = () => {
     
     const fetchProducts = async (req,res)=>{
         try{
-            const response = await fetch(`${process.env.BACKEND_URL}/get-product`);
+            const response = await fetch('https://sellerassignment.onrender.com/get-product');
             const  data = await response.json();
             if(data.success){
 

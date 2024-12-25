@@ -51,7 +51,7 @@ const Shop = ({ category }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/get-product`);
+        const response = await fetch('https://sellerassignment.onrender.com/get-product');
         const data = await response.json();
         if (data.success) {
           const validProducts = data.products.filter(

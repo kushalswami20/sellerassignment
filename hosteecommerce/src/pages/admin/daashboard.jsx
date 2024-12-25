@@ -31,7 +31,7 @@ const DashboardPage = () => {
             }
 
             try {
-                const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-seller`, {
+                const response = await fetch('https://sellerassignment.onrender.com/admin/verify-seller', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

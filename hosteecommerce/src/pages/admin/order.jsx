@@ -99,7 +99,7 @@ const Orders = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-seller`, {
+        const response = await fetch('https://sellerassignment.onrender.com/admin/verify-seller', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/get-orders`);
+      const response = await fetch('https://sellerassignment.onrender.com/get-orders');
       const data = await response.json();
       const ordersWithStatus = data.orders.map(order => ({
         ...order,

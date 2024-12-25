@@ -66,7 +66,7 @@ const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/admin/logout`, {
+            const response = await fetch(`https://sellerassignment.onrender.com/admin/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ const Sidebar = () => {
                 formData.append('images', file);
             });
 
-            const response = await fetch(`${process.env.BACKEND_URL}/add-product`, {
+            const response = await fetch('https://sellerassignment.onrender.com/add-product', {
                 method: 'POST',
                 body: formData
             });

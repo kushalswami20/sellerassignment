@@ -185,36 +185,7 @@ router.post('/save-coupon', async (req, res) => {
     }
   });
   
-  // Save coupon route
-  // router.post('/save-coupon', async (req, res) => {
-  //   try {
-  //     const { code, discountPercentage } = req.body;
   
-  //     const coupon = new Coupon({
-  //       code,
-  //       discountPercentage
-  //     });
-  
-  //     await coupon.save();
-  
-  //     res.status(201).json({
-  //       success: true,
-  //       message: 'Coupon saved successfully',
-  //       coupon
-  //     });
-  
-  //     // Send email to all users about new coupon
-  //     const subject = 'New Coupon Available!';
-  //     const message = `A new coupon ${code} is now available with ${discountPercentage}% discount. Use it in your next purchase!`;
-  //     await sendEmailToAllUsers(subject, message);
-  //   } catch (error) {
-  //     res.status(500).json({
-  //       success: false,
-  //       message: 'Error saving coupon',
-  //       error: error.message
-  //     });
-  //   }
-  // });
   
   // Verify coupon route
   router.post('/verify-coupon', async (req, res) => {

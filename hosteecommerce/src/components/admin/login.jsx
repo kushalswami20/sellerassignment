@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        `${process.env.BACKEND_URL}/admin/login`,
+        'https://sellerassignment.onrender.com/admin/login',
         {
           method: "POST",
           headers: {

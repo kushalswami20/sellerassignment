@@ -9,6 +9,7 @@ const AdminSignup = () => {
   const navigate = useNavigate();
   const [sellerId, setSellerId] = useState("");
   const [emailId, setEmailId] = useState("");
+  // const BACKEND_URL = process.env.BACKEND_URL; // Added default fallback
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +47,7 @@ const AdminSignup = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/admin/seller/signup`, {
+      const response = await fetch('https://sellerassignment.onrender.com/admin/seller/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -79,7 +80,7 @@ const AdminSignup = () => {
     setError('');
     
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/admin/send-otp`, {
+      const response = await fetch('https://sellerassignment.onrender.com/admin/send-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -121,7 +122,7 @@ const AdminSignup = () => {
     if (resendDisabled) return;
     
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/admin/send-otp`, {
+      const response = await fetch('https://sellerassignment.onrender.com/admin/send-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -164,7 +165,7 @@ const AdminSignup = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-otp`, {
+      const response = await fetch('https://sellerassignment.onrender.com/admin/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -25,7 +25,7 @@ const CouponPage = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/admin/verify-seller`, {
+        const response = await fetch('https://sellerassignment.onrender.com/admin/verify-seller', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const CouponPage = () => {
 
   const fetchCoupons = async () => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/coupon/get-coupon`);
+      const response = await fetch('https://sellerassignment.onrender.com/coupon/get-coupon');
       const data = await response.json();
       if (data.success) {
         setCoupons(data.coupons);
@@ -82,7 +82,7 @@ const CouponPage = () => {
 
   const handleDeleteCoupon = async (code, discountPercentage) => {
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/coupon/delete-coupon`, {
+      const response = await fetch('https://sellerassignment.onrender.com/coupon/delete-coupon', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -112,7 +112,7 @@ const CouponPage = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/coupon/save-coupon`, {
+      const response = await fetch('https://sellerassignment.onrender.com/coupon/save-coupon', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

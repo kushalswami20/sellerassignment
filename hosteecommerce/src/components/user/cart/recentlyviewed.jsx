@@ -16,7 +16,7 @@ const RecentlyViewed = () => {
       }
 
       const productPromises = recentlyViewedProducts.map(async (element) => {
-        const response = await fetch(`${process.env.BACKEND_URL}/product/` + element);
+        const response = await fetch('https://sellerassignment.onrender.com/product/' + element);
         const productDetail = await response.json();
         return productDetail.product;
       });

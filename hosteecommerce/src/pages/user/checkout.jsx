@@ -52,7 +52,7 @@ const Checkout = () => {
     }
 
     try {
-      const cartResponse = await fetch(`${process.env.BACKEND_URL}/cart/${userId}`);
+      const cartResponse = await fetch(`https://sellerassignment.onrender.com/cart/${userId}`);
       const cartData = await cartResponse.json();
 
       if (!cartData.success) {
@@ -73,7 +73,7 @@ const Checkout = () => {
       }, {});
 
       const productPromises = Object.values(groupedItems).map(async (item) => {
-        const productResponse = await fetch(`${process.env.BACKEND_URL}/product/${item.productId}`);
+        const productResponse = await fetch(`https://sellerassignment.onrender.com/product/${item.productId}`);
         const productData = await productResponse.json();
         
         if (productData.success) {
@@ -144,7 +144,7 @@ const Checkout = () => {
 
     if (saveAddress) {
       try {
-        await fetch(`${process.env.BACKEND_URL}/update-address`, {
+        await fetch('https://sellerassignment.onrender.com/update-address', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -169,7 +169,7 @@ const Checkout = () => {
     }));
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/cart/place-order`, {
+      const response = await fetch('https://sellerassignment.onrender.com/cart/place-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
